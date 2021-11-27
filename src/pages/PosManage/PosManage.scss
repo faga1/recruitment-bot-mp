@@ -1,0 +1,19 @@
+@import "@/assets/_var.scss";
+.position-manage{
+    font-family: PingFang SC;
+    margin-top: 5.3vw;
+    .position-item{
+        margin:4vw auto 0;
+    }
+    .publish-position{
+        width: 60vw;
+        height: 11.7vw;
+        border-radius: 2vw;
+        color:$white;
+        background-color: #0080FF;
+        position:fixed;
+        left:50%;
+        transform: translateX(-50%);
+        bottom: 8vw;
+    }
+}

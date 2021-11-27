@@ -1,0 +1,42 @@
+@import "@/assets/_var.scss";
+.position-detail{
+    padding:5.4vw 4vw;
+    .position-des{
+        margin-top: 5.4vw;
+        .des-text{
+            margin-top: 2.6vw;
+            font-size:4vw;
+            font-weight: bold;
+            color:$near-black;
+        }
+        .des-content{
+            color:#999999;
+            font-size:3.7vw;
+            line-height: 6.7vw;
+        }
+    }
+    .detail-tools{
+        position: fixed;
+        bottom:8vw;
+        display: flex;
+        .edit{
+            width: 28vw;
+            height: 11.7vw;
+            line-height: 11.7vw;
+            text-align: center;
+            border:0.13vw solid #0080FF;
+            color:#0080FF;
+            border-radius: 2vw;
+        }
+        .publish{
+            width: 60vw;
+            height: 11.7vw;
+            color:$white;
+            background-color: #0080FF;
+            border-radius: 2vw;
+            line-height: 11.7vw;
+            text-align: center;
+            margin-left:4vw;
+        }
+    }
+}

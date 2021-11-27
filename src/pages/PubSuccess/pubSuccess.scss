@@ -1,0 +1,42 @@
+@import "@/assets/_var.scss";
+.success-icon{
+    position:absolute;
+    top:13vw;
+    left:50%;
+    transform: translateX(-50%);
+    img{
+        width: 20vw;
+        height: 20vw;
+    }
+    .success-text{
+        font-size: 4vw;
+        color:$blue;
+        text-align: center;
+        margin-top:2vw;
+    }
+}
+.success-tools{
+    display: flex;
+    width: 100%;
+    justify-content:space-between;
+    position:absolute;
+    padding:0 4vw;
+    bottom: 4vw;
+    a{
+        text-align: center;
+        line-height: 12vw;
+        width: 44vw;
+        height: 12vw;
+        font-size:4vw;
+        border-radius: 2vw;
+    }
+    .pos-manage{
+        color:$blue;
+        border:0.12vw solid $blue;
+    }
+    .pub-position{
+        color:$white;
+        background-color: $blue;
+    }
+
+}

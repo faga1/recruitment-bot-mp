@@ -1,0 +1,48 @@
+@import "@/assets/_var.scss";
+
+.resume-eva{
+    margin-top:5.3vw;
+    .position-deliver{
+        .deliver-card{
+            background-color: $white;
+            border-radius: 5.9vw;
+            height: 11.7vw;
+            width: 92vw;
+            text-align: center;
+            line-height: 11.7vw;
+            font-size:4vw;
+            margin:2.6vw auto 5.3vw;
+        }
+    }
+    .resulet-btn{
+        .btn{
+            width: 44.7vw;
+            height: 11.7vw;
+            display: flex;
+            
+        }
+    }
+}
+.header{
+    margin-left:4vw;
+    display: flex;
+    .rectangle{
+        margin:1.1vw 0.8vw 0 0;
+        width: 1.3vw;
+        height: 4vw;
+        background-color: $blue;
+        border-radius: 1vw;
+        
+    }
+    .text{
+        font-size:4vw;
+        color:$near-black;
+    }
+    .text-des{
+        margin-left:2vw;
+        font-size:3.2vw;
+        color:#999999;
+        line-height: 6.3vw;
+        height: 6.3vw;
+    }
+}

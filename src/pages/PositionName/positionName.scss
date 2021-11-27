@@ -1,0 +1,30 @@
+@import '@/assets/_var.scss';
+.positionName{
+    .adm-input-wrapper{
+        width: 92vw;
+        height: 13.3vw;
+        margin:5.3vw auto;
+        background-color: $white;
+        padding:0 4vw;
+        border-radius: 2.6vw;
+    }
+    .adm-tree-select{
+        width: 92vw;
+        margin:0 auto;
+        height: 111.5vw;
+        .adm-tree-select-column{
+            background-color: $white;
+        }
+    }
+    .adm-button{
+        width: 60vw;
+        height: 11.7vw;
+        background-color:$blue;
+        font-size:4vw;
+        color:$white;
+        position:fixed;
+        bottom: 8vw;
+        left:50%;
+        transform: translateX(-50%);
+    }
+}

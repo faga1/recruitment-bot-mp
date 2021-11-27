@@ -1,0 +1,52 @@
+@import "@/assets/_var.scss";
+
+.resume-card{
+    position:relative;
+    font-family: PingFang SC;
+    width: 92vw;
+    height: 39vw;
+    background-color: $white;
+    border-radius: 2.6vw;
+    padding:3.7vw 3.7vw 2.6vw 4vw;
+    .hunterInfo{
+        display: flex;
+        img{
+            width: 10.6vw;
+            height: 10.6vw;
+            border-radius: 50%;
+        }
+        .hunter-name{
+            font-size:3.2vw;
+            height: 10.6vw;
+            line-height: 10.6vw;
+            margin-left: 2.6vw;
+            color:$black;
+        }
+    }
+    .hunter-tags{
+        display: flex;
+        margin-top:2.6vw;
+        .tag-item{
+            padding:1vw 3.5vw;
+            background-color: #F5F5F5;
+            color:#666666;
+            border-radius: 1.3vw;
+            margin-right:2.6vw;
+        }
+    }
+    .self-des{
+        color:#999999;
+        font-size:3.5vw;
+        line-height: 4.9vw;
+        margin-top:3vw;
+    }
+    .share-btn{
+        position: absolute;
+        right:4.5vw;
+        top:6vw;
+        img{
+            width: 6.6vw;
+            height: 6.6vw;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+@import "@/assets/_var.scss";
+
+.adm-tabs{
+    font-family: PingFang SC;
+    
+    .adm-tabs-tab-list{
+        .adm-tabs-tab-wrap{
+            
+        }
+        .adm-tabs-tab-line{
+            height: 1.3vw;
+            width: 6.6vw!important;
+            border-radius: 1vw;
+            left:3vw;
+        }
+    }
+    .adm-tabs-tab-active{
+        color:$near-black;
+        font-weight:bold;
+    }
+    
+}
+.Tabs-content{
+    margin-top:2.6vw;
+    .resume-card{
+        margin:0 auto 4vw;
+    }
+}

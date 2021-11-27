@@ -1,0 +1,28 @@
+@import "@/assets/_var.scss";
+
+.picker-card{
+    margin-bottom: 4vw;
+    .picker-name{
+        font-size:3.2vw;
+        color:#999999;
+
+    }
+    .picker-content{
+        border:none;
+        padding:0 4vw;
+        margin-top:2.6vw;
+        border-radius: 2.6vw;
+        position:relative;
+        width: 92vw;
+        height: 13.3vw;
+        background-color: $white;
+        img{
+            position:absolute;
+            top:50%;
+            transform: translateY(-50%);
+            right:3.6vw;
+            width: 3.5vw;
+            height: 3.5vw;
+        }
+    }
+}
