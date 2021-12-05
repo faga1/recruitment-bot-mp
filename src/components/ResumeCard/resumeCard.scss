@@ -4,23 +4,19 @@
     position:relative;
     font-family: PingFang SC;
     width: 92vw;
-    height: 39vw;
+    height: 35vw;
     background-color: $white;
     border-radius: 2.6vw;
     padding:3.7vw 3.7vw 2.6vw 4vw;
-    .hunterInfo{
-        display: flex;
+    .positionName{
         img{
-            width: 10.6vw;
-            height: 10.6vw;
-            border-radius: 50%;
+            width: 4.8vw;
+            height: 4.8vw;
         }
-        .hunter-name{
-            font-size:3.2vw;
-            height: 10.6vw;
-            line-height: 10.6vw;
-            margin-left: 2.6vw;
-            color:$black;
+        .position-text{
+            font-weight: bold;
+            font-size:4vw;
+            color:#333333;
         }
     }
     .hunter-tags{
@@ -34,16 +30,25 @@
             margin-right:2.6vw;
         }
     }
+    
     .self-des{
         color:#999999;
         font-size:3.5vw;
         line-height: 4.9vw;
         margin-top:3vw;
+        overflow: hidden;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        display:-webkit-box;
+        -webkit-box-orient:vertical;
+        -webkit-line-clamp:2;
     }
     .share-btn{
         position: absolute;
         right:4.5vw;
         top:6vw;
+        border:none;
+        padding:0;
         img{
             width: 6.6vw;
             height: 6.6vw;

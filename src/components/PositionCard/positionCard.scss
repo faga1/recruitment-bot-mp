@@ -1,11 +1,12 @@
 @import "@/assets/_var.scss";
 
 .position-item{
+    position: relative;
     display: flex;
     justify-content:space-between;
     padding:4vw 4vw 2.6vw;
     width: 92vw;
-    height: 39.7vw;
+    height: 31vw;
     border-radius: 2.6vw;
     background-color: $white;
     .item-left{
@@ -26,6 +27,7 @@
             }
         }
         .item-company{
+            display: flex;
             margin-top:2vw;
             img{
                 width:4.8vw;
@@ -65,8 +67,9 @@
         .item-isPub{
             text-align: right;
             font-size:4.5vw;
-            color:#ACD5FF;
-            margin-top: 6.3vw;
+            position: absolute;
+            bottom: 2vw;
+            right: 4vw;
         }
         .item-address{
             color:#999999;

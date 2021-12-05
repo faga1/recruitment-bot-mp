@@ -4,14 +4,14 @@ import { Button } from 'antd-mobile'
 import './pickerCard.scss'
 
 export default (props)=>{
-    console.log(props);
     return (
         <div className='picker-card'>
-            <div className="picker-name">{props.name}</div>
-            <Button className='picker-content' onClick={()=>props.method(props.index)}>
-                {props.content} 
-                <img src={pickBtn} />
+            <div className="picker-name">{props.label}</div>
+            <Button className='picker-content' onClick={()=>props.method(props.index,props.posObj)} style={{color:props.content?'#000000':'#D1D1D1'}}>
+                    {props.content?props.content:props.placeholder}
+                    <img src={pickBtn} />
             </Button>
+            
         </div>
     )
 }

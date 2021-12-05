@@ -1,0 +1,49 @@
+@import '@/assets/_var.scss';
+.share-card{
+    border-radius: 2vw;
+    width: 66.7vw;
+    height: 68.4vw;
+    background-color: $white;
+    margin:48vw auto;
+    padding:4vw 6.6vw;
+    .share-card-text{
+        font-size: 3.5vw;
+        width: 100%;
+        text-align: center;
+        color:$black;
+    }
+    .expire{
+        color:#FF0000;
+        font-size:3.2vw;
+        margin:2.6vw 0;
+        width: 100%;
+        text-align: center;
+    }
+    .share-url{
+        width: 53.3vw;
+        height: 26.6vw;
+        background-color: #F5F5F5;
+        border-radius: 2vw;
+        color:#999999;
+        border:none;
+    }
+    .share-tools{
+        display: flex;
+        .adm-button{
+            padding:0;
+            border-radius: 2vw;
+            margin-top: 5vw;
+            width: 26.4vw;
+            height: 11.7vw;
+        }
+        .cancle{
+            color:$blue;
+            border:0.2vw solid $blue;
+        }
+        .copy{
+            color:$white;
+            background-color: $blue;
+            margin-left: 1.3vw;
+        }
+    }
+}

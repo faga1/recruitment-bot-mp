@@ -1,12 +1,15 @@
 import PubPosition from '@/pages/PubPosition'
-import PubSuccess from '@/pages/PubSuccess'
+import Success from '@/pages/Success'
 import PosManage from '@/pages/PosManage'
 import PosDetail from '@/pages/PosDetail'
-import ResumeList from '@/pages/ResumeList'
-import ResumeEva from '@/pages/ResumeEva'
+import DeliveryList from '@/pages/DeliveryList'
+import DeliveryEva from '@/pages/DeliveryEva'
 import PositionName from '@/pages/PositionName'
-import PositionDes from '@/pages/PositionDes'
+import PositionDesc from '@/pages/PositionDesc'
 import PlatFormErr from '@/pages/PlatFormErr'
+import DeliveryShared from '@/pages/DeliveryShared'
+import DeliveryDetail from '../pages/DeliveryDetail'
+import PdfDetail from '@/pages/PdfDetail'
 
 function flatten(arr) {
 	return arr.reduce((prev, current) => {
@@ -23,18 +26,18 @@ export const menus = [
 		component: PubPosition,
 	},
 	{
-		path:'/posDetail',
+		path:'/posDetail/:id',
 		name:'职位详情',
 		icon:'',
 		exact:true,
 		component:PosDetail
 	},
 	{
-		path: "/pubSuccess",
+		path: "/success/:type",
 		name: "发布成功",
 		icon: "",
 		exact: true,
-		component: PubSuccess,
+		component: Success,
 	},
 	{
 		path: "/posManage",
@@ -44,18 +47,18 @@ export const menus = [
 		component: PosManage,
 	},
 	{
-		path:'/resumeList',
+		path:'/deliveryList',
 		name:'简历列表',
 		icon:'',
 		exact:true,
-		component:ResumeList
+		component:DeliveryList
 	},
 	{
-		path:'/resumeEva',
+		path:'/deliveryEva/:deliveryRecordId/:isHandled',
 		name:'简历评价',
 		icon:'',
 		exact:true,
-		component:ResumeEva
+		component:DeliveryEva
 	},
 	{
 		path:'/positionName',
@@ -65,11 +68,11 @@ export const menus = [
 		component:PositionName
 	},
 	{
-		path:'/positionDes',
+		path:'/positionDesc',
 		name:'职位描述',
 		icon:'',
 		exact:true,
-		component:PositionDes
+		component:PositionDesc
 	},
 	{
 		path:'/platFormErr',
@@ -77,6 +80,27 @@ export const menus = [
 		icon:'',
 		exact:true,
 		component:PlatFormErr
+	},
+	{
+		path:'/deliveryShared/:resource',
+		name:'投递分享',
+		icon:'',
+		exact:true,
+		component:DeliveryShared
+	},
+	{
+		path:'/deliveryDetail/:deliveryRecordId/:isHandled',
+		name:'投递详情',
+		icon:'',
+		exact:true,
+		component:DeliveryDetail
+	},
+	{
+		path:'/pdfDetail',
+		name:'pdf详情',
+		icon:'',
+		exact:true,
+		component:PdfDetail
 	}
 	// {
 	// 	path: "/func",

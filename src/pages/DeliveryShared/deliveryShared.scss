@@ -1,0 +1,57 @@
+@import '@/assets/_var.scss';
+
+.resume-share{
+    .extract-card{
+        padding:3.5vw 3.3vw 4.3vw;
+        width: 66.6vw;
+        height: 59.3vw;
+        background-color: $white;
+        border-radius: 2vw;
+        margin: 13.3vw auto;
+    }
+    .userInfo{
+        display: flex;
+        .username{
+            line-height: 9vw;
+            height: 9vw;
+            margin:0 2.6vw;
+        }
+        .share-text{
+            line-height: 9vw;
+            height: 9vw;
+            color:#999999;
+            font-size: 3.2vw;
+        }
+    }
+    .code-status{
+        width: 100%;
+        height: 4.4vw;
+        margin: 1.8vw 0;
+        text-align: center;
+    }
+    .extract-tools{
+        .adm-input{
+            width: 60vw;
+            height: 11.7vw;
+            background-color: #F5F5F5;
+            border-radius: 5.9vw;
+            text-align: center;
+            font-size:3.2vw;
+            color:$black;
+        }
+        .adm-button{
+            margin-top:2.6vw;
+            width: 60vw;
+            height: 11.7vw;
+            border-radius: 5.9vw;
+            background-color: $blue;
+            color:$white;
+        }
+    }
+    .validity-text{
+        width: 100%;
+        text-align: center;
+        color:#999999;
+        margin-top: 4vw;
+    }
+}

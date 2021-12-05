@@ -1,0 +1,96 @@
+@import "@/assets/_var.scss";
+
+.resume-eva{
+    position: relative;
+    margin-top:5.3vw;
+    padding:0 4vw 27.7vw; 
+    .position-deliver{
+        .deliver-card{
+            background-color: $white;
+            border-radius: 5.9vw;
+            height: 11.7vw;
+            width: 92vw;
+            text-align: center;
+            line-height: 11.7vw;
+            font-size:4vw;
+        }
+    }
+    .eva-result{
+        .result-btn{
+            display: flex;
+            justify-content: space-between;
+            .btn{
+                font-size:3.5vw;
+                width: 44.6vw;
+                height: 11.7vw;
+                border-radius:5.9vw;
+                img{
+                    width: 3.5vw;
+                    height: 3.5vw;
+                    margin-right: 1vw;
+                }
+            }
+        }
+    }
+    .score-options{
+        display: flex;
+        justify-content: space-between;
+        .score-item{
+            width: 14vw;
+            height: 11.7vw;
+            border-radius: 5.9vw;
+            background-color: $white;
+            
+        }
+        .score-active{
+            background-color: #0080FF;
+            color:$white;
+        }
+    }
+    .score-explain{
+        color:#999999;
+        font-size:3.2vw;
+        margin-top: 2.8vw;
+    }
+    .adm-text-area{
+        min-height: 61.6vw;
+        background-color: $white;
+        padding:4vw;
+        color:#666666;
+        font-size:3.5vw;
+    }
+    .assessment-btn{
+        width: 60vw;
+        height: 11.7vw;
+        background-color:$blue;
+        font-size:4vw;
+        color:$white;
+        position:absolute;
+        bottom: 8vw;
+        left:50%;
+        transform: translateX(-50%);
+    }
+}
+.header{
+    display: flex;
+    margin:5.3vw 0 2.6vw;
+    .rectangle{
+        margin:1.1vw 0.8vw 0 0;
+        width: 1.3vw;
+        height: 4vw;
+        background-color: $blue;
+        border-radius: 1vw;
+        
+    }
+    .text{
+        font-size:4vw;
+        color:$near-black;
+    }
+    .text-des{
+        margin-left:2vw;
+        font-size:3.2vw;
+        color:#999999;
+        line-height: 6.3vw;
+        height: 6.3vw;
+    }
+}

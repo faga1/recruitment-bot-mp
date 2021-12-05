@@ -27,28 +27,44 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config)=>{
-	config.headers.token=localStorage.getItem('token')
+	// if(!localStorage.getItem('token')){
+	// 	Toast.show({
+	// 		icon:'fail',
+	// 		content:'当前会话已过期,请重新登录',
+	// 		maskClickable:false
+	// 	})
+	// 	setTimeout(()=>{
+	// 		oAuth()
+	// 	},800)
+	// 	return
+	// }
 	console.log(config);
+	config.headers.token=localStorage.getItem('token')
+
 	return config
 })
 
 
 axiosInstance.interceptors.response.use(
-	function(response) {
-		console.log(response.data.code);
+	async (response)=> {
+		console.log(response);
 		if(response.data.code===41100){
+			let config={...response.config}
 			Toast.show({
 				icon:'fail',
 				content:'当前会话已过期,请重新登录',
 				maskClickable:false
 			})
-			setTimeout(()=>{
-				oAuth()
-			},1300)
+			await oAuth()
+			Toast.clear()
+			console.log(config);
+			if(config.url==='/positions'||config.url==='/deliveryHandleRecords'&&config.method==='post') return
+			return axiosInstance.request(config)
 		}
 		return response;
 	},
 	function(error) {
+		console.log(error);
 		const code = error.response.status;
 		const msg = codeMessage[code] || `未知错误[${code}]`;
 		message.error(msg);

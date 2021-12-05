@@ -1,0 +1,25 @@
+@import "@/assets/_var.scss";
+
+.title{
+    display: flex;
+    margin:5.3vw 0 2.6vw;
+    .rectangle{
+        margin:1.1vw 0.8vw 0 0;
+        width: 1.3vw;
+        height: 4vw;
+        background-color: $blue;
+        border-radius: 1vw;
+        
+    }
+    .text{
+        font-size:4vw;
+        color:$near-black;
+    }
+    .text-des{
+        margin-left:2vw;
+        font-size:3.2vw;
+        color:#999999;
+        line-height: 6.3vw;
+        height: 6.3vw;
+    }
+}

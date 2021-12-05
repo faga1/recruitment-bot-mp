@@ -11,10 +11,19 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, "avenir next", avenir, helvetica,
 		"helvetica neue", ubuntu, roboto, noto, "segoe ui", arial, sans-serif,PingFang SC;
 	background-color: $silver;
+	overflow-x: auto;
+	overflow-y:auto;
+
 }
 
 .sep-line {
 	border-bottom: 1px solid $silver;
 	padding-top: $spacing-small;
 	margin-bottom: $spacing-small;
+}
+.app-root{
+	max-width: 100vw;
+}
+span{
+	max-width: 100vw;
 }

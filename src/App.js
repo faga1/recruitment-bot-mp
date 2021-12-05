@@ -3,16 +3,16 @@ import {BrowserRouter,Switch,Route,Redirect,withRouter} from 'react-router-dom'
 import { oAuth } from "@/models/common";
 import routes from '@/router'
 function App(props) {
-    useEffect(() => {
-		// if(window.fb.getPlatform()===0){
-		// 	props.history.push('/platFormErr')
-		// }
-        // // 判断是否含有token 没有则拉起弹窗
-        // else{
-			// if (localStorage.getItem('token')) return 
-    	    // oAuth()
-		// }
-    }, [])
+    // useEffect(() => {
+	// 	if(window.fb.getPlatform()===0){
+	// 		props.history.push('/platFormErr')
+	// 	}
+    //     // 判断是否含有token 没有则拉起弹窗
+    //     else{
+	// 		if (localStorage.getItem('token')) return 
+    // 	    oAuth()
+	// 	}
+    // }, [])
 
 	return (
 		<div className="app-root">

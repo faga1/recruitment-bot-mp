@@ -1,26 +1,35 @@
+import { Button } from "antd-mobile";
 import React from "react";
 import avatar from '../../../public/avatar.jpg'
 import share from '../../../public/组 215.png'
 import './resumeCard.scss'
+import positionIcon from '../../../public/组 205.png'
 
 export default (props)=>{
     return (
-        <div className='resume-card'>
-            <div className="hunterInfo">
+        <div className='resume-card' 
+            onClick={props.onClick}
+            >
+            {/* <div className="hunterInfo">
                 <img src={avatar} alt="" />
-                <div className="hunter-name">用户234</div>
+                <div className="hunter-name">{props.name}</div>
+            </div> */}
+            <div className="positionName">
+                <img src={positionIcon}  />
+                <span className='position-text'>{props.positionName}</span>
             </div>
             <div className='hunter-tags'>
-                <div className="tag-item">本科</div>
-                <div className="tag-item">5-10年</div>
-                <div className="tag-item">26岁</div>
+                <div className="tag-item">{props.degree}</div>
+                <div className="tag-item">{props.workYear}</div>
+                <div className="tag-item">{props.age}</div>
             </div>
+            
             <div className="self-des">
-                5年以上java开发经验，本科以上学历，java基础扎实， 深入了解java成熟开源框架...
+                {props.personalDesc}
             </div>
-            <div className="share-btn" style={{display:(props.activeKey)==='tread'?'none':'block'}}>
+            <Button className="share-btn" style={{display:(props.activeKey)==='handled'?'block':'none'}} onClick={props.shareClick}>
                 <img src={share} />
-            </div>
+            </Button>
         </div>
     )
 }

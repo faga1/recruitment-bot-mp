@@ -1,0 +1,121 @@
+import React,{useState,useEffect} from "react";
+import {Tabs, Toast,Mask} from 'antd-mobile'
+import ShareCard from "../../components/ShareCard";
+import ResumeCard from "../../components/ResumeCard";
+import './deliveryList.scss'
+import { getDeliveryList, getShareLink } from "../../components/request/request";
+
+
+export default (props)=>{
+    // tab栏状态
+    const [activeKey,setKey]=useState('unhandled')
+    // 已处理列表
+    const [handledList,setHandledList]=useState([])
+    // 未处理列表
+    const [unhandledList,setUnhandledList]=useState([])
+    // 遮罩层显示
+    const [maskVis,setMaskVis] = useState(false)
+    // 分享信息(url，提取码，过期时间)
+    const [shareInfo,setShareInfo]=useState()
+    // 切换tab栏触发事件
+    const changeKey=(key)=>{
+        setKey(key)
+        if(key!=='handled') return
+        if(!handledList.length){
+            getList(key)
+        }
+    }
+    useEffect(() => {
+        getList('unhandled')
+        return () => {
+        }
+    }, [])
+    // 获取投递列表，参数代表获取已上传还是未上传
+    const getList=async(handledText)=>{
+        const res = await getDeliveryList(handledText)
+        if(res.code!==20000&&res.code!==41100){
+            Toast.show({
+                icon:'fail',
+                content:'获取投递列表异常',
+                maskClickable:false
+            })
+            return
+        }
+        if(handledText==='handled'){
+            setHandledList(pre=>{
+                return [...pre,...res.data]
+            })
+            return 
+        }
+        setUnhandledList(res.data)
+    }
+    
+    const toDeliveryEva=(index,isHandled,e)=>{
+        if(isHandled){
+            return props.history.push(`/deliveryDetail/${handledList[index].id}/${isHandled}`)
+        }
+        props.history.push(`/deliveryDetail/${unhandledList[index].id}/${isHandled}`)
+    }
+    // 点击分享
+    const shareClick=async(index,e)=>{
+        //阻止冒泡
+        e.stopPropagation()
+        const id=handledList[index].id
+        // 将连接信息缓存，如果有缓存则走缓存
+        if(sessionStorage.getItem(id+'')){
+            setShareInfo(JSON.parse(sessionStorage.getItem(id+'')))
+            setMaskVis(true)
+            return 
+        }
+
+        Toast.show({
+            icon:'loading',
+            content:'链接生成中...',
+            duration:0,
+            maskClickable:false
+        })
+        const res = await getShareLink(id)
+        Toast.clear()
+        if(res.code!==20000){
+            Toast.show({
+                icon:'fail',
+                content:'获取分享链接失败'
+            })
+            return
+        }
+        
+        setShareInfo(res.data)
+        
+        sessionStorage.setItem(id+'',JSON.stringify(res.data))
+        setMaskVis(true)
+    }
+    
+    return (
+        <>
+            <Tabs activeKey={activeKey} onChange={changeKey}>
+                <Tabs.Tab title='已处理' key='handled' >
+                </Tabs.Tab>
+                <Tabs.Tab title='未处理' key='unhandled'>
+                </Tabs.Tab>
+            </Tabs>
+            <div className='Tabs-content'>
+                {
+                    activeKey==='handled'&&
+                    handledList.map((item,index)=>{
+                        return <ResumeCard activeKey={activeKey} {...item} onClick={(e)=>toDeliveryEva(index,true,e)} shareClick={(e)=>shareClick(index,e)}></ResumeCard>
+                    })
+                }
+                {
+                    activeKey==='unhandled'&&
+                    unhandledList.map((item,index)=>{
+                        return <ResumeCard activeKey={activeKey} {...item} onClick={()=>toDeliveryEva(index,false)}></ResumeCard>
+                    })
+                }
+
+            </div>
+            <Mask visible={maskVis} onMaskClick={()=>setMaskVis(false)}>
+                <ShareCard {...shareInfo} cancleMask={()=>setMaskVis(false)}></ShareCard>
+            </Mask>
+        </>
+    )
+}

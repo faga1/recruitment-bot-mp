@@ -1,0 +1,64 @@
+@import '@/assets/_var.scss';
+.deliveryDetail{
+    padding:0 4vw;
+    .react-pdf__Page__canvas{
+        max-height: 50vw!important;
+        max-width: 50vw!important;
+
+        transform: none!important;
+    }
+    .pdf_viewer{
+        height: 50vw;
+        width: 50vw;
+    }
+    
+    textarea{
+        color:#999999;
+        font-size:3.5vw;
+    }
+    
+    .btn{
+        display: flex;
+        margin: 5vw 0;
+        .edit{
+            width: 27.8vw;
+            height: 11.7vw;
+            border:0.2vw solid $blue;
+            color:$blue;
+            margin-right: 4vw;
+        }
+        .share{
+            width:60vw;
+            height: 11.7vw;
+            background-color: $blue;
+            color:$white;
+        }
+        .evaluate{
+            margin:8vw auto;
+            width: 60vw;
+            height: 11.7vw;
+            background-color: $blue;
+            color:$white
+        }
+    }
+    .adm-mask{
+        height: 250vw!important;
+    }
+    .info-item{
+        img{
+            width: 4.8vw;
+            height: 4.8vw;
+            
+        }
+        span{
+            color:#666666;
+            font-size:3.5vw;
+            margin-left:2.6vw
+        }
+        margin-bottom: 2.6vw;
+    }
+    
+    .pdfViewer{
+        overflow:hidden;
+    }
+}

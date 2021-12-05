@@ -1,0 +1,21 @@
+@import '@/assets/_var.scss';
+.score-options{
+    display: flex;
+    justify-content: space-between;
+    .score-item{
+        width: 14vw;
+        height: 11.7vw;
+        border-radius: 5.9vw;
+        background-color: $white;
+        
+    }
+    .score-active{
+        background-color: #0080FF;
+        color:$white;
+    }
+    .score-explain{
+        color:#999999;
+        font-size:3.2vw;
+        margin-top: 2.8vw;
+    }
+}
