@@ -10,10 +10,6 @@ export default (props)=>{
         <div className='resume-card' 
             onClick={props.onClick}
             >
-            {/* <div className="hunterInfo">
-                <img src={avatar} alt="" />
-                <div className="hunter-name">{props.name}</div>
-            </div> */}
             <div className="positionName">
                 <img src={positionIcon}  />
                 <span className='position-text'>{props.positionName}</span>

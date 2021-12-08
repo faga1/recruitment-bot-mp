@@ -9,6 +9,7 @@ export default function(props){
     useEffect(() => {
         if(!localStorage.getItem('token')){
             setTimeout(() => {
+                // 身份判断
                 oAuth('recruiter').then(()=>{
                     getPosList().then(val=>{
                         
@@ -20,7 +21,6 @@ export default function(props){
                     })
                 })
             }, 600);
-            
         }
         getPosList().then(val=>{
             if(val.code===20000){

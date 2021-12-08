@@ -10,10 +10,13 @@ import './deliveryEva.scss'
 import { getDeliveryDetail, postEvaluation } from "../../components/request/request";
 
 export default (props)=>{
-
+    //是否通过 0:未处理 1:通过 2:w未通过
     const [ispassed,setIspassed]=useState(0)
+
     const [textVal,setTextVal]=useState('')
+    // 当前分数
     const [currentScore,setCurrentScore]=useState()
+    // 职位名称
     const [positionName,setPositionName]=useState('')
     const isHandled=props.match.params.isHandled==='true'?true:false
     const id = props.match.params.deliveryRecordId
@@ -22,6 +25,7 @@ export default (props)=>{
         return () => {
         }
     }, [])
+    // 将分数与是否通过关联
     useEffect(() => {
         if(currentScore<3){
             return setIspassed(2)
@@ -32,6 +36,7 @@ export default (props)=>{
         return () => {
         }
     }, [currentScore])
+    // 获取评价
     const getEvaluation=async()=>{
         let handledText=isHandled?'handled':'unhandled'
         const res = await getDeliveryDetail(id,handledText)
@@ -41,6 +46,7 @@ export default (props)=>{
             setCurrentScore(res.data.score)
         }
     }
+    // 改变分数
     const changeScore=(score)=>{
         console.log(typeof score);
         if(score<3){
@@ -50,6 +56,7 @@ export default (props)=>{
         }
         setCurrentScore(score)
     }
+    // 改变是否通过
     const changePassed=(passed)=>{
         setIspassed(passed)
         if(!currentScore){
@@ -68,6 +75,7 @@ export default (props)=>{
             setCurrentScore(2)
         }
     }
+    // 发送评价
     const sendEva=async()=>{
         console.log(props.match.params.deliveryRecodeId);
         let eva={

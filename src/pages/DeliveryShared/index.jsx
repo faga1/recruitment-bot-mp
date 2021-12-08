@@ -6,16 +6,18 @@ import './deliveryShared.scss'
 import { confirmCode, getUsername } from "../../components/request/request";
 export default (props)=>{
     const [username,setUsername] = useState()
+    // 链接中的resource
     const {resource}=props.match.params
+    // 提取码
     const [codeVal,setCodeVal] = useState('')
+    // 0:正常 1:分享码已失效 2:提取码错误
     const [codeStatus,setCodeStatus] = useState(0)
     useEffect(() => {
-        console.log(resource);
         getUserInfo()
         return () => {
         }
     }, [])
-
+    // 获取分享人信息
     const getUserInfo=async()=>{
         const res = await getUsername(resource)
         if(res.code===44100){
@@ -48,6 +50,7 @@ export default (props)=>{
         const res=await confirmCode(codeVal,resource) 
         Toast.clear()
         if(res.code===44200){
+            // 提取码错误
             return setCodeStatus(2)
         }
         props.history.push({pathname:`/deliveryDetail/${res.data.id}/${true}`,state:{data:res.data,show:false}})

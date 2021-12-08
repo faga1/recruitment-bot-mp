@@ -5,6 +5,7 @@ import './positionName.scss'
 
 export default(props)=>{
     const [inputValue,setInputVal]=useState('')
+    // 职位类型(后续需更改)
     const options=[
         {
             label: '研发',

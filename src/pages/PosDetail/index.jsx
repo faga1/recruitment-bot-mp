@@ -5,10 +5,11 @@ import { getPosInfo,positionPub } from "../../components/request/request";
 import './posDetail.scss'
 
 export default (props)=>{
-    console.log(props.match.params.id)
+    // 职位信息
     const [posObj,setPosObj]=useState({
         published:true
     })
+    
     const posEdit=()=>{
         props.history.push({pathname:'/pubPosition',query:{id:props.match.params.id}})
     }
@@ -20,6 +21,7 @@ export default (props)=>{
         return () => {
         }
     }, [])
+    // 发布职位
     const posPub=()=>{
         positionPub(props.match.params.id)
         props.history.push('/success/pub')

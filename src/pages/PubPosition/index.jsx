@@ -39,15 +39,6 @@ export default function(props){
     }
     // 跳转
     const navigateTo=(index,pos)=>{
-        // // 遍历posInfo 将内容传给posObj 缓存下来
-        // posInfo.forEach((item,index)=>{
-        //     if(index===6){
-        //         posObj.minimumSalary=item.minimumSalary
-        //         posObj.highestSalary=item.highestSalary
-        //     }else{
-        //         posObj[item.name]=item.content
-        //     }
-        // })
         //缓存posObj
         // 防止缓存时跳转丢失数据
         sessionStorage.setItem('posObj',JSON.stringify(pos))

@@ -30,12 +30,19 @@ function InfoItem(props){
 
 export default function (props) {
   const [pageNumber, setPageNumber] = useState(1);
+  // 投递信息
   const [detail,setDetail] = useState({})
-  const [shareInfo,setShareInfo] = useState()                  
+  //分享框中信息
+  const [shareInfo,setShareInfo] = useState()  
+  //遮罩层是否可见                
   const [maskVis,setMaskVis] = useState(false)
+  // 判断该简历是否被处理
   const isHandled=props.match.params.isHandled==='true'?true:false
+  // 简历ID
   const id=props.match.params.deliveryRecordId
+  // 是否从分享入口来
   const show = props.location.state?props.location.state.show:true
+  // 求职者信息
   const InfoList=[
       {
         icon:nameIcon,
@@ -70,11 +77,12 @@ export default function (props) {
         text:detail.address
       }
     ] 
-    console.log(JSON.stringify(InfoList));
   useEffect(() => {
     if(props.location.state){
       let data= props.location.state.data
+      // 将性别转化为字符串
       data.sex=data.sex?'男':'女'
+      // 格式化最近处理时间
       data.updateTime=moment(data.updateTime).format('YYYY.MM.DD')
       return setDetail(data)
     }
@@ -88,13 +96,13 @@ export default function (props) {
     const res = await getDeliveryDetail(id,handledText)
     res.data.sex=res.data.sex?'男':'女'
     res.data.updateTime=moment(res.data.updateTime).format('YYYY.MM.DD')
-    console.log(JSON.stringify(res.data));
     setDetail(res.data)
   }
   const getShareInfo=async(e)=>{
+    // 阻止冒泡
     e.stopPropagation()
     const id=detail.id
-        // 将连接信息缓存，如果有缓存则走缓存
+    // 将连接信息缓存，如果有缓存则走缓存
     if(sessionStorage.getItem(id+'')){
       setShareInfo(JSON.parse(sessionStorage.getItem(id+'')))
       setMaskVis(true)

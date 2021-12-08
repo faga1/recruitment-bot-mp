@@ -4,9 +4,12 @@ import './success.scss'
 import {Button} from 'antd-mobile'
 
 export default function(props){
+    // 提交成功还是发布成功
     const {type}=props.match.params
     const id = props.location.state?props.location.state.id:null
+    // 左边按钮的url
     const url_left=type==='pub'?'/posManage':`/deliveryDetail/${id}/${true}`
+    // 右边
     const url_right=type==='pub'?'/pubPosition':'/deliveryList'
     return (
         <>

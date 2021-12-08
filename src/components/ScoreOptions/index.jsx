@@ -32,7 +32,7 @@ export default (props)=>{
     return (
         <div className='score-options'>
             {
-                score.map((item,index)=>(
+                score.map((item)=>(
                     <Button className={['score-item',item.score===props.currentScore?'score-active':''].join(' ')} key={item.score} onClick={()=>{props.onClick(item.score)}}>{item.label}</Button>
                 ))
             }

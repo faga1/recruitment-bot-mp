@@ -3,6 +3,7 @@ import { TextArea,Button } from 'antd-mobile';
 import './positionDesc.scss'
 
 export default function (props) {
+    // 职位描述内容
     const [textVal,setTextVal]=useState('')
     useEffect(() => {
         setTextVal(props.location.state.value)

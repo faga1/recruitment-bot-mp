@@ -4,13 +4,6 @@ import avatar from '../../../public/avatar.jpg'
 import './positionCard.scss'
 
 export default (props)=>{
-    console.log(props);
-    useEffect(() => {
-        console.log(props);
-        return () => {
-            
-        }
-    }, [])
     return (
         <>
             <div className="position-item" onClick={props.onClick}>

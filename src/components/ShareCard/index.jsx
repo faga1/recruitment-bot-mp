@@ -1,13 +1,14 @@
-import React,{useEffect,useState} from "react";
+import React from "react";
 import {Button, Toast} from 'antd-mobile'
 import './shareCard.scss'
 import TextArea from "antd/lib/input/TextArea";
 import copy from 'copy-to-clipboard'
-import request from "../request";
 export default (props)=>{
     const url=props.url
     const code=props.code
+    // textArea中显示的内容
     const textVal=url+' 提取码:'+code
+    // 实际复制的内容
     const copyVal='hi,这是我觉得还不错的简历,有效期七天,请尽快查阅哦。链接:'+url+'?fb_redirect&open_type=mp'+' 提取码:'+code
     const copyUrl=()=>{
         copy(copyVal)
