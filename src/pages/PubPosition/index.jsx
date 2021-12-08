@@ -207,12 +207,16 @@ export default function(props){
         // 需要判断是编辑还是新建
         if(posObj.id){
             editPos(posObj.id,posObj).then(val=>{
-                props.history.push({pathname:`/posDetail/${posObj.id}`,state:{id:val.data}})
+                if(val.data.code===20000){
+                    props.history.push({pathname:`/posDetail/${posObj.id}`,state:{id:val.data.data}})
+                }
             })
             return 
         }
         storePosition(posObj).then((val)=>{
-            props.history.push({pathname:`/posDetail/${val.data}`})
+            if(val.code===20000){
+                props.history.push({pathname:`/posDetail/${val.data}`})
+            }
         })
         
     }
@@ -267,7 +271,7 @@ export default function(props){
                             return 
                         }
                         setPosInfo(preInfo=>{
-                            preInfo[pickerOwner].content=v[0]+'k'+'-'+v[1]+'k'
+                            preInfo[pickerOwner].content=v[0]+'-'+v[1]+'k'
                             preInfo[pickerOwner].minimumSalary=parseInt(v[0])
                             preInfo[pickerOwner].highestSalary=parseInt(v[1])
                             return [...preInfo]

@@ -39,7 +39,7 @@
     "core-js": "^3.6.4",
     "lodash": "^4.17.15",
     "mddir": "^1.1.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.1",
     "qs": "^6.9.1",
     "react": "^16.13.0",
     "react-area-selector": "^0.2.17",

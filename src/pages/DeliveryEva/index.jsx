@@ -84,7 +84,9 @@ export default (props)=>{
 			})
             return
         }
-        props.history.push({pathname:'/success/commit',state:{id}})
+        if(res.code===20000){
+            props.history.push({pathname:'/success/commit',state:{id}})
+        }
     }
     return(
         <div className='resume-eva'>

@@ -1,15 +1,33 @@
 import React,{useEffect,useState} from "react";
 import PositionCard from "../../components/PositionCard";
 import { getPosList } from "../../components/request/request";
-import { Button } from 'antd-mobile'
+import { Button, Dialog } from 'antd-mobile'
 import './PosManage.scss'
+import { oAuth } from "../../models/common";
 export default function(props){
     const [posList,setPosList]=useState([])
     useEffect(() => {
+        if(!localStorage.getItem('token')){
+            setTimeout(() => {
+                oAuth('recruiter').then(()=>{
+                    getPosList().then(val=>{
+                        
+                        if(val.code===20000){
+                            setPosList((pre)=>{
+                                return [...pre,...val.data]
+                            })
+                        }
+                    })
+                })
+            }, 600);
+            
+        }
         getPosList().then(val=>{
-            setPosList((pre)=>{
-                return [...pre,...val.data]
-            })
+            if(val.code===20000){
+                setPosList((pre)=>{
+                    return [...pre,...val.data]
+                })
+            }
         })
         return () => {
         }

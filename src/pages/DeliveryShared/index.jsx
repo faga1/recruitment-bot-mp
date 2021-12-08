@@ -7,7 +7,7 @@ import { confirmCode, getUsername } from "../../components/request/request";
 export default (props)=>{
     const [username,setUsername] = useState()
     const {resource}=props.match.params
-    const [codeVal,setCodeVal] = useState()
+    const [codeVal,setCodeVal] = useState('')
     const [codeStatus,setCodeStatus] = useState(0)
     useEffect(() => {
         console.log(resource);
@@ -18,6 +18,9 @@ export default (props)=>{
 
     const getUserInfo=async()=>{
         const res = await getUsername(resource)
+        if(res.code===44100){
+            return setCodeStatus(1)
+        }
         if(res.code!==20000&&res.code!==41100){
             Toast.show({
                icon:'fail',
@@ -25,23 +28,29 @@ export default (props)=>{
             })
             return
         }
-        if(res.code===44100){
-            return setCodeStatus(1)
-        }
+        
         setUsername(res.data)
     }
     const confirm=async()=>{
+        if(codeVal.trim()===''){
+            Toast.show({
+                icon:'fail',
+                content:'提取码不能为空'
+            })
+            return
+        }
         Toast.show({
             icon:'loading',
             content:'验证中...',
             duration:0
         })
+        
         const res=await confirmCode(codeVal,resource) 
         Toast.clear()
         if(res.code===44200){
             return setCodeStatus(2)
         }
-        props.history.push({pathname:`/deliveryDetail/${res.data.id}/${true}`,state:res.data})
+        props.history.push({pathname:`/deliveryDetail/${res.data.id}/${true}`,state:{data:res.data,show:false}})
     }
     return (
         <div className="resume-share">

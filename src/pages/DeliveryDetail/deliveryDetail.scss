@@ -1,6 +1,6 @@
 @import '@/assets/_var.scss';
 .deliveryDetail{
-    padding:0 4vw;
+    padding:0 4vw 6vw;
     .react-pdf__Page__canvas{
         max-height: 50vw!important;
         max-width: 50vw!important;
@@ -15,17 +15,30 @@
     textarea{
         color:#999999;
         font-size:3.5vw;
+        
     }
-    
+    .evaluation{
+        background-color: $white;
+        color:#666666;
+        padding:4vw;
+        min-height: 61.6vw;
+    }
+    .updateInfo{
+        display: flex;
+        justify-content: space-between;
+        color:#999999;
+        font-size:3.2vw;
+        margin-top: 5.5vw;
+    }
     .btn{
         display: flex;
+        justify-content: space-between;
         margin: 5vw 0;
         .edit{
             width: 27.8vw;
             height: 11.7vw;
             border:0.2vw solid $blue;
             color:$blue;
-            margin-right: 4vw;
         }
         .share{
             width:60vw;

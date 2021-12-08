@@ -29,7 +29,7 @@ export default (props)=>{
             <PositionCard {...posObj}/>
             <div className='position-des'>
                 <div className='des-text'>职位描述</div>
-                <TextArea className="des-content" value={posObj.desc} autoSize={{ minRows: 3, maxRows: 5 }}>
+                <TextArea className="des-content" value={posObj.desc} autoSize={{ minRows: 10, maxRows: 100 }}>
                     
                 </TextArea>
                 

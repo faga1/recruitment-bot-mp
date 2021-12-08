@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from "react";
-import {Tabs, Toast,Mask} from 'antd-mobile'
+import {Tabs, Toast,Mask,Dialog} from 'antd-mobile'
 import ShareCard from "../../components/ShareCard";
 import ResumeCard from "../../components/ResumeCard";
 import './deliveryList.scss'
 import { getDeliveryList, getShareLink } from "../../components/request/request";
+import { oAuth } from "../../models/common";
 
 
 export default (props)=>{
@@ -26,6 +27,13 @@ export default (props)=>{
         }
     }
     useEffect(() => {
+        // 如果没有token，请求重发
+        if(!localStorage.getItem('token')){
+            oAuth('admain').then(()=>{
+                getList('unhandled')
+            })
+        }
+        // 一开始请求获取未处理的，后续点击tab栏再请求处理过的
         getList('unhandled')
         return () => {
         }
@@ -33,7 +41,7 @@ export default (props)=>{
     // 获取投递列表，参数代表获取已上传还是未上传
     const getList=async(handledText)=>{
         const res = await getDeliveryList(handledText)
-        if(res.code!==20000&&res.code!==41100){
+        if(res.code!==20000&&res.code!==41100&&res.code!==45000){
             Toast.show({
                 icon:'fail',
                 content:'获取投递列表异常',

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { message } from "antd";
-import {Toast} from 'antd-mobile'
+import {Toast,Dialog} from 'antd-mobile'
 import {oAuth} from '@/models/common'
 
 const codeMessage = {
@@ -26,21 +26,18 @@ export const axiosInstance = axios.create({
 	headers: { "X-Requested-With": "XMLHttpRequest" },
 });
 
-axiosInstance.interceptors.request.use((config)=>{
-	// if(!localStorage.getItem('token')){
-	// 	Toast.show({
-	// 		icon:'fail',
-	// 		content:'当前会话已过期,请重新登录',
-	// 		maskClickable:false
-	// 	})
-	// 	setTimeout(()=>{
-	// 		oAuth()
-	// 	},800)
-	// 	return
-	// }
-	console.log(config);
+axiosInstance.interceptors.request.use(async (config)=>{
+	console.log(JSON.stringify(config));
+	console.log(config.url.split('/')[2])
+	if(!localStorage.getItem('token')&&config.url!=='/login'&&config.url!=='/recruiterLogin'&&config.url!=='/admainLogin'&&config.url.split('?')[0]!=='/deliveryHandleRecords/extract'&&config.url.split('?')[0]!=='/deliveryHandleRecords/shareUser'){
+		Toast.show({
+			icon:'fail',
+			content:'当前会话已失效,请重新登录',
+			maskClickable:false,
+			duration:800,
+		})
+	}
 	config.headers.token=localStorage.getItem('token')
-
 	return config
 })
 
@@ -53,13 +50,24 @@ axiosInstance.interceptors.response.use(
 			Toast.show({
 				icon:'fail',
 				content:'当前会话已过期,请重新登录',
-				maskClickable:false
+				maskClickable:false,
+				duration:800
 			})
 			await oAuth()
 			Toast.clear()
 			console.log(config);
-			if(config.url==='/positions'||config.url==='/deliveryHandleRecords'&&config.method==='post') return
+			if(config.url==='/positions'&&config.method==='post'||config.url==='/deliveryHandleRecords'){
+				return response
+			}
 			return axiosInstance.request(config)
+		}
+		if(response.data.code===45000){
+			Dialog.alert({
+				content:'无权限访问',
+				onConfirm:()=>{
+					window.fb.closeWindow()
+				}
+			})
 		}
 		return response;
 	},

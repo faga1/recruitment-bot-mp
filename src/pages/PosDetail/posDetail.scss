@@ -14,12 +14,14 @@
             color:#999999;
             font-size:3.7vw;
             line-height: 6.7vw;
+            // height: 120vw;
+            min-height: 120vw;
         }
     }
     .detail-tools{
-        position: fixed;
-        bottom:8vw;
+        margin:4vw auto;
         display: flex;
+        width: 100%;
         .edit{
             width: 28vw;
             height: 11.7vw;
@@ -43,7 +45,7 @@
             text-align: center;
             line-height: 11.7vw;
             border-radius: 2vw;
-            margin-left: 19.5vw;
+            margin:0 auto;
         }
     }
 }

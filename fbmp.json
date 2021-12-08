@@ -1,0 +1,55 @@
+{
+
+    "pages": {
+
+        "/**": {
+
+            "showNavigationBar": true,
+
+            "navigationBarBackgroundColor": "#ffffff",
+
+            "navigationBarTextColor": "#000000",
+
+            "navigationBarTitleText": "position"
+
+        },
+
+        "/a/**": {
+
+            "showNavigationBar": true,
+
+            "navigationBarBackgroundColor": "#6179F2",
+
+            "navigationBarTextColor": "#ffffff",
+
+            "navigationBarTitleText": "fanbook小程序"
+
+        },
+
+        "/a/a1.html": {
+
+            "showNavigationBar": true,
+
+            "navigationBarTitleText": "a1页面"
+
+        },
+
+        "/a/b/**": {
+
+            "showNavigationBar": true,
+
+            "navigationBarBackgroundColor": "#00000078",
+
+            "navigationBarTextColor": "#ececec",
+
+            "navigationBarTitleText": ""
+
+        },
+
+        "/a/b/b2.html": {
+
+        }
+
+    }
+
+}

@@ -1,10 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { Document, Page, pdfjs} from 'react-pdf';
-import {PDFReader} from 'react-read-pdf'
-import { Toast } from 'antd-mobile';
 import Title from '@/components/Title'
 import ScoreOptions from '../../components/ScoreOptions';
-import request from '../../components/request';
 import nameIcon from '../../../public/组 219.png'
 import sexIcon from '../../../public/组 220.png'
 import birthIcon from '../../../public/组 209.png'
@@ -15,10 +12,10 @@ import emailIcon from '../../../public/email.png'
 import addressIcon from '../../../public/address.png'
 import positionIcon from '../../../public/组 205.png'
 import ShareCard from '../../components/ShareCard';
-
+import moment from 'moment'
 
 import './deliveryDetail.scss'
-import {TextArea,Button, Mask} from 'antd-mobile';
+import {TextArea,Button, Mask, Toast} from 'antd-mobile';
 import { getDeliveryDetail, getShareLink } from '../../components/request/request';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
@@ -38,6 +35,7 @@ export default function (props) {
   const [maskVis,setMaskVis] = useState(false)
   const isHandled=props.match.params.isHandled==='true'?true:false
   const id=props.match.params.deliveryRecordId
+  const show = props.location.state?props.location.state.show:true
   const InfoList=[
       {
         icon:nameIcon,
@@ -45,11 +43,11 @@ export default function (props) {
       },
       {
         icon:sexIcon,
-        text:detail.sex?'男':'女'
+        text:detail.sex?detail.sex:''
       },
       {
         icon:birthIcon,
-        text:detail.age?detail.age:''+'岁'
+        text:detail.age?detail.age+'岁':''
       },
       {
         icon:degreeIcon,
@@ -72,9 +70,13 @@ export default function (props) {
         text:detail.address
       }
     ] 
+    console.log(JSON.stringify(InfoList));
   useEffect(() => {
     if(props.location.state){
-      return setDetail(props.location.state)
+      let data= props.location.state.data
+      data.sex=data.sex?'男':'女'
+      data.updateTime=moment(data.updateTime).format('YYYY.MM.DD')
+      return setDetail(data)
     }
     getDetail()
     return () => {
@@ -84,6 +86,9 @@ export default function (props) {
   const getDetail=async()=>{
     const handledText=isHandled?'handled':'unhandled'
     const res = await getDeliveryDetail(id,handledText)
+    res.data.sex=res.data.sex?'男':'女'
+    res.data.updateTime=moment(res.data.updateTime).format('YYYY.MM.DD')
+    console.log(JSON.stringify(res.data));
     setDetail(res.data)
   }
   const getShareInfo=async(e)=>{
@@ -121,7 +126,7 @@ export default function (props) {
       <Title text='基本信息'></Title>
       {
         InfoList.map(item=>{
-          return <InfoItem {...item} key={item.text}></InfoItem>
+          return <InfoItem {...item} ></InfoItem>
         })
       }
       <Title text='投递岗位'></Title>
@@ -141,14 +146,18 @@ export default function (props) {
           <Page pageNumber={pageNumber} />
         </Document>
       </div>
-
+      <Title text='综合评价'></Title>
+      <TextArea className='evaluation' autoSize={{minRows:5,maxRows:10}} value={detail.evaluation} disabled></TextArea>
+      <div className='updateInfo'>
+        <div className='updateTime'>最近更新于{detail.updateTime}</div>
+        <div className='handlerName'>操作人:{detail.handlerFanbookNickname}</div>
+      </div>
       
-      
-      <div className="btn">
+      {show&&<div className="btn" >
         <Button style={{display:isHandled?'block':'none'}} className='edit' onClick={()=>{props.history.push(`/deliveryEva/${id}/${isHandled}`)}}>编辑</Button>
         <Button style={{display:isHandled?'block':'none'}} className='share' onClick={(e)=>getShareInfo(e)}>分享</Button>
         <Button style={{display:isHandled?'none':'block'}} className='evaluate' onClick={()=>{props.history.push(`/deliveryEva/${id}/${isHandled}`)}}>立即评价</Button>
-      </div>
+      </div>}
       <Mask visible={maskVis} onMaskClick={()=>setMaskVis(false)}>
         <ShareCard  {...shareInfo} cancleMask={()=>setMaskVis(false)}></ShareCard>
       </Mask>
