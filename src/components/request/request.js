@@ -1,5 +1,4 @@
 import request,{axiosInstance} from './index.js'
-import { Toast } from 'antd-mobile'
 
 // 获取职位信息
 export async function getPosInfo(id){
@@ -8,11 +7,12 @@ export async function getPosInfo(id){
 
 // 编辑已有职位
 export async function editPos(id,posObj){
-    return await axiosInstance({
+    const res = await axiosInstance({
         url:`/positions/${id}`,
         data:posObj,
         method:'put'
     })
+    return res.data
 }
 
 // 保存新职位
@@ -22,8 +22,9 @@ export async function storePosition(posObj){
 
 // 发布职位
 export async function positionPub(id){
-    await axiosInstance.patch(`/positions/${id}/published`)
+    const res = await axiosInstance.patch(`/positions/${id}/published`)
     sessionStorage.removeItem('posObj')
+    return res.data
 }
 
 // 获取职位列表
@@ -38,7 +39,7 @@ export async function getDeliveryList(handledText){
 
 // 获取分享链接和提取码
 export async function getShareLink(id){
-    return await request.post(`/deliveryHandleRecords/${id}/share`)
+    return  await request.post(`/deliveryHandleRecords/${id}/share`)
 }
 
 // 获取投递详情
@@ -64,4 +65,5 @@ export async function confirmCode(code,resource){
             resource
         }
     })
+    
 }

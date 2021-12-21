@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import PositionCard from "../../components/PositionCard";
-import {Button, TextArea} from 'antd-mobile'
+import {Button, TextArea, Toast} from 'antd-mobile'
 import { getPosInfo,positionPub } from "../../components/request/request";
 import './posDetail.scss'
 
@@ -16,15 +16,23 @@ export default (props)=>{
     useEffect(() => {
         let id =props.match.params.id
         getPosInfo(id).then(val=>{
-            setPosObj(val.data)
+            if(val.code===20000){
+                setPosObj(val.data)
+            }
         })
         return () => {
         }
     }, [])
     // 发布职位
-    const posPub=()=>{
-        positionPub(props.match.params.id)
-        props.history.push('/success/pub')
+    const posPub=async()=>{
+        const res = await positionPub(props.match.params.id)
+        if(res.code===20000){
+            Toast.show({
+                icon:'success',
+                content:'发布成功'
+            })
+            props.history.push('/success/pub')
+        }
     }
     return (
         <div className='position-detail'>

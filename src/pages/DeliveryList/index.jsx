@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import {Tabs, Toast,Mask,Dialog} from 'antd-mobile'
+import {Tabs, Toast,Mask} from 'antd-mobile'
 import ShareCard from "../../components/ShareCard";
 import ResumeCard from "../../components/ResumeCard";
 import './deliveryList.scss'
@@ -39,26 +39,30 @@ export default (props)=>{
         }
     }, [])
     // 获取投递列表，参数代表获取已上传还是未上传
+    /**
+     * 
+     * @param {string} handledText 是否已被处理
+     * @returns 
+     */
     const getList=async(handledText)=>{
         const res = await getDeliveryList(handledText)
-        if(res.code!==20000&&res.code!==41100&&res.code!==45000){
-            Toast.show({
-                icon:'fail',
-                content:'获取投递列表异常',
-                maskClickable:false
-            })
-            return
+        if(res.code===20000){
+            if(handledText==='handled'){
+                setHandledList(pre=>{
+                    return [...pre,...res.data]
+                })
+                return 
+            }
+            setUnhandledList(res.data)
         }
-        if(handledText==='handled'){
-            setHandledList(pre=>{
-                return [...pre,...res.data]
-            })
-            return 
-        }
-        setUnhandledList(res.data)
     }
-    
-    const toDeliveryEva=(index,isHandled,e)=>{
+    /**
+     * 
+     * @param {number} index 简历序号 
+     * @param {boolean} isHandled 是否被处理 
+     * @returns 
+     */
+    const toDeliveryDetail=(index,isHandled)=>{
         if(isHandled){
             return props.history.push(`/deliveryDetail/${handledList[index].id}/${isHandled}`)
         }
@@ -75,7 +79,6 @@ export default (props)=>{
             setMaskVis(true)
             return 
         }
-
         Toast.show({
             icon:'loading',
             content:'链接生成中...',
@@ -84,18 +87,11 @@ export default (props)=>{
         })
         const res = await getShareLink(id)
         Toast.clear()
-        if(res.code!==20000){
-            Toast.show({
-                icon:'fail',
-                content:'获取分享链接失败'
-            })
-            return
+        if(res.code===20000){
+            setShareInfo(res.data)
+            sessionStorage.setItem(id+'',JSON.stringify(res.data))
+            setMaskVis(true)
         }
-        
-        setShareInfo(res.data)
-        
-        sessionStorage.setItem(id+'',JSON.stringify(res.data))
-        setMaskVis(true)
     }
     
     return (
@@ -110,13 +106,13 @@ export default (props)=>{
                 {
                     activeKey==='handled'&&
                     handledList.map((item,index)=>{
-                        return <ResumeCard activeKey={activeKey} {...item} onClick={(e)=>toDeliveryEva(index,true,e)} shareClick={(e)=>shareClick(index,e)}></ResumeCard>
+                        return <ResumeCard activeKey={activeKey} {...item} onClick={()=>toDeliveryDetail(index,true)} shareClick={(e)=>shareClick(index,e)}></ResumeCard>
                     })
                 }
                 {
                     activeKey==='unhandled'&&
                     unhandledList.map((item,index)=>{
-                        return <ResumeCard activeKey={activeKey} {...item} onClick={()=>toDeliveryEva(index,false)}></ResumeCard>
+                        return <ResumeCard activeKey={activeKey} {...item} onClick={()=>toDeliveryDetail(index,false)}></ResumeCard>
                     })
                 }
 

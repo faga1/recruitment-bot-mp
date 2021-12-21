@@ -27,8 +27,6 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(async (config)=>{
-	console.log(JSON.stringify(config));
-	console.log(config.url.split('/')[2])
 	if(!localStorage.getItem('token')&&config.url!=='/login'&&config.url!=='/recruiterLogin'&&config.url!=='/admainLogin'&&config.url.split('?')[0]!=='/deliveryHandleRecords/extract'&&config.url.split('?')[0]!=='/deliveryHandleRecords/shareUser'){
 		Toast.show({
 			icon:'fail',
@@ -36,6 +34,7 @@ axiosInstance.interceptors.request.use(async (config)=>{
 			maskClickable:false,
 			duration:800,
 		})
+		return
 	}
 	config.headers.token=localStorage.getItem('token')
 	return config
@@ -44,21 +43,24 @@ axiosInstance.interceptors.request.use(async (config)=>{
 
 axiosInstance.interceptors.response.use(
 	async (response)=> {
-		console.log(response);
-		if(response.data.code===41100){
-			let config={...response.config}
+		if(response.status!==200){
 			Toast.show({
 				icon:'fail',
-				content:'当前会话已过期,请重新登录',
-				maskClickable:false,
+				content:codeMessage[response.status]
+			})
+			return 
+		}
+		if(response.data.code!==20000){
+			Toast.show({
+				icon:'fail',
+				content:response.data.message,
 				duration:800
 			})
+		}
+		if(response.data.code===41100){
+			let config={...response.config}
 			await oAuth()
 			Toast.clear()
-			console.log(config);
-			if(config.url==='/positions'&&config.method==='post'||config.url==='/deliveryHandleRecords'){
-				return response
-			}
 			return axiosInstance.request(config)
 		}
 		if(response.data.code===45000){

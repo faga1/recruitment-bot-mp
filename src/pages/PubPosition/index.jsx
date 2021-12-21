@@ -13,6 +13,7 @@ export default function(props){
     const [pickerOwner,setPickerOwner]=useState(0)//picker对应的是哪个信息
     const [columns,setColumns]=useState([[]])//picker中的选项
     const [cascadeVis,setCascadeVis]=useState(false)//级联选择器是否可见
+    const [btnDisable,setBtnDisable]=useState(false)
     //将数据抽离出来方便交互
     const [posObj,setPosObj]=useState({
         company:'',
@@ -121,7 +122,9 @@ export default function(props){
     useEffect(() => {
         if(props.location.query){
             getPosInfo(props.location.query.id).then(val=>{
-                setPosObj({...val.data})
+                if(val.code===20000){
+                    setPosObj({...val.data})
+                }
             })
             return 
         }
@@ -148,7 +151,9 @@ export default function(props){
         if(props.location.query){
             
             getPosInfo(props.location.query.id).then(val=>{
-                setPosObj({...val.data})
+                if(val.code===20000){
+                    setPosObj({...val.data})
+                }
                 // posObjToPosInfo()
             })
         }
@@ -196,16 +201,28 @@ export default function(props){
             }
         }
         // 需要判断是编辑还是新建
+        setBtnDisable(true)
         if(posObj.id){
             editPos(posObj.id,posObj).then(val=>{
-                if(val.data.code===20000){
-                    props.history.push({pathname:`/posDetail/${posObj.id}`,state:{id:val.data.data}})
+                setBtnDisable(false)
+                if(val.code===20000){
+                    Toast.show({
+                        icon:'success',
+                        content:'编辑成功'
+                    })
+                    
+                    props.history.push({pathname:`/posDetail/${posObj.id}`,state:{id:val.data}})
                 }
             })
             return 
         }
         storePosition(posObj).then((val)=>{
+            setBtnDisable(false)
             if(val.code===20000){
+                Toast.show({
+                    icon:'success',
+                    content:'保存成功'
+                })
                 props.history.push({pathname:`/posDetail/${val.data}`})
             }
         })
@@ -225,7 +242,6 @@ export default function(props){
                             setPosObj(pre=>{
                                 return {...pre,company:val}
                             })
-                            console.log('Input'+JSON.stringify(posObj));                            
                         }}
                     />
                         <img src={pickBtn} />
@@ -299,7 +315,7 @@ export default function(props){
                     posObj.address=address
                 }}
             />
-            <Button className='pubPosBtn' onClick={storePos}>保存</Button>
+            <Button className='pubPosBtn' onClick={storePos} disabled={btnDisable}>保存</Button>
         </div>
     )
 }

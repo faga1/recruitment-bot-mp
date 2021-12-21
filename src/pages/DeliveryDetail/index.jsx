@@ -94,9 +94,11 @@ export default function (props) {
   const getDetail=async()=>{
     const handledText=isHandled?'handled':'unhandled'
     const res = await getDeliveryDetail(id,handledText)
-    res.data.sex=res.data.sex?'男':'女'
-    res.data.updateTime=moment(res.data.updateTime).format('YYYY.MM.DD')
-    setDetail(res.data)
+    if(res.code===20000){
+      res.data.sex=res.data.sex?'男':'女'
+      res.data.updateTime=moment(res.data.updateTime).format('YYYY.MM.DD')
+      setDetail(res.data)
+    }
   }
   const getShareInfo=async(e)=>{
     // 阻止冒泡
@@ -116,21 +118,14 @@ export default function (props) {
     })
     const res = await getShareLink(id)
     Toast.clear()
-    if(res.code!==20000){
-        Toast.show({
-            icon:'fail',
-            content:'获取分享链接失败'
-        })
-        return
+    if(res.code===20000){
+      setShareInfo(res.data)
+      sessionStorage.setItem(id+'',JSON.stringify(res.data))
+      setMaskVis(true)
     }
-    
-    setShareInfo(res.data)
-    
-    sessionStorage.setItem(id+'',JSON.stringify(res.data))
-    setMaskVis(true)          
   }
   return (
-    <div className='deliveryDetail'>
+    <div className='deliveryDetail' >
       <Title text='基本信息'></Title>
       {
         InfoList.map(item=>{
@@ -154,12 +149,19 @@ export default function (props) {
           <Page pageNumber={pageNumber} />
         </Document>
       </div>
-      <Title text='综合评价'></Title>
-      <TextArea className='evaluation' autoSize={{minRows:5,maxRows:10}} value={detail.evaluation} disabled></TextArea>
-      <div className='updateInfo'>
-        <div className='updateTime'>最近更新于{detail.updateTime}</div>
-        <div className='handlerName'>操作人:{detail.handlerFanbookNickname}</div>
-      </div>
+      {isHandled&&<div>
+        <Title text='综合评价'></Title>
+        <TextArea className='evaluation' 
+          autoSize={{minRows:5,maxRows:10}} 
+          value={detail.evaluation} disabled 
+
+        ></TextArea>
+        <div className='updateInfo'>
+          <div className='updateTime'>最近更新于{detail.updateTime}</div>
+          <div className='handlerName'>操作人:{detail.handlerFanbookNickname}</div>
+        </div>
+      </div>}
+      
       
       {show&&<div className="btn" >
         <Button style={{display:isHandled?'block':'none'}} className='edit' onClick={()=>{props.history.push(`/deliveryEva/${id}/${isHandled}`)}}>编辑</Button>

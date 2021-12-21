@@ -12,7 +12,7 @@ import { getDeliveryDetail, postEvaluation } from "../../components/request/requ
 export default (props)=>{
     //是否通过 0:未处理 1:通过 2:w未通过
     const [ispassed,setIspassed]=useState(0)
-
+    const [isKeyboard,setIsKeyboard] = useState(false)
     const [textVal,setTextVal]=useState('')
     // 当前分数
     const [currentScore,setCurrentScore]=useState()
@@ -40,15 +40,16 @@ export default (props)=>{
     const getEvaluation=async()=>{
         let handledText=isHandled?'handled':'unhandled'
         const res = await getDeliveryDetail(id,handledText)
-        setPositionName(res.data.positionName)
-        if(isHandled){
-            setTextVal(res.data.evaluation)
-            setCurrentScore(res.data.score)
+        if(res.code===20000){
+            setPositionName(res.data.positionName)
+            if(isHandled){
+                setTextVal(res.data.evaluation)
+                setCurrentScore(res.data.score)
+            }
         }
     }
     // 改变分数
     const changeScore=(score)=>{
-        console.log(typeof score);
         if(score<3){
             setIspassed(2)
         }else{
@@ -84,20 +85,12 @@ export default (props)=>{
             evaluation:textVal
         }
         const res = await postEvaluation(eva)
-        if(res.code!==20000&&res.code!==41100){
-            Toast.show({
-				icon:'fail',
-				content:'提交评价失败',
-				maskClickable:false
-			})
-            return
-        }
         if(res.code===20000){
             props.history.push({pathname:'/success/commit',state:{id}})
         }
     }
     return(
-        <div className='resume-eva'>
+        <div className='resume-eva' style={{marginBottom:isKeyboard?'70vw':''}}>
             <div className="position-deliver">
                 <Title text='投递简历'></Title>
                 <div className='deliver-card'>{positionName}</div>
@@ -123,7 +116,11 @@ export default (props)=>{
             </div>
             <div className="assessment">
                 <Title text='综合评价'></Title>
-                <TextArea  value={textVal}  onChange={(val)=>setTextVal(val)}/>
+                <TextArea  
+                    value={textVal}  
+                    onChange={(val)=>setTextVal(val)}
+                    onFocus={()=>setIsKeyboard(true)}
+                    onBlur={()=>setIsKeyboard(false)}/>
                     
 
             </div>

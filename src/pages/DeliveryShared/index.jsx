@@ -1,7 +1,5 @@
 import React,{useEffect,useState} from "react";
-import avatar from "../../../public/avatar.jpg";
 import {Input,Button,Toast} from 'antd-mobile'
-import request from "../../components/request";
 import './deliveryShared.scss'
 import { confirmCode, getUsername } from "../../components/request/request";
 export default (props)=>{
@@ -23,15 +21,9 @@ export default (props)=>{
         if(res.code===44100){
             return setCodeStatus(1)
         }
-        if(res.code!==20000&&res.code!==41100){
-            Toast.show({
-               icon:'fail',
-               content:'获取分享人信息失败' 
-            })
-            return
+        if(res.code===20000){
+            setUsername(res.data)
         }
-        
-        setUsername(res.data)
     }
     const confirm=async()=>{
         if(codeVal.trim()===''){
@@ -53,7 +45,10 @@ export default (props)=>{
             // 提取码错误
             return setCodeStatus(2)
         }
-        props.history.push({pathname:`/deliveryDetail/${res.data.id}/${true}`,state:{data:res.data,show:false}})
+        if(res.code===20000){
+            props.history.push({pathname:`/deliveryDetail/${res.data.id}/${true}`,state:{data:res.data,show:false}})
+
+        }
     }
     return (
         <div className="resume-share">

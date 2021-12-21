@@ -9,7 +9,7 @@ export default (props)=>{
     // textArea中显示的内容
     const textVal=url+' 提取码:'+code
     // 实际复制的内容
-    const copyVal='hi,这是我觉得还不错的简历,有效期七天,请尽快查阅哦。链接:'+url+'?fb_redirect&open_type=mp'+' 提取码:'+code
+    const copyVal='hi,这是我觉得还不错的简历,有效期七天,请尽快查阅哦。链接:'+url+'提取码:'+code
     const copyUrl=()=>{
         copy(copyVal)
         Toast.show({
