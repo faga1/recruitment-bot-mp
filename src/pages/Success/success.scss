@@ -1,12 +1,16 @@
 @import "@/assets/_var.scss";
+
+.success{
+    
+}
 .success-icon{
-    position:absolute;
-    top:13vw;
-    left:50%;
-    transform: translateX(-50%);
+    padding-top:10vw;
+    width: 100%;
     img{
-        width: 20vw;
-        height: 20vw;
+        width: 18vw;
+        height: 18vw;
+        margin:4vw auto;
+        display: block;
     }
     .success-text{
         font-size: 4vw;
@@ -18,15 +22,12 @@
 .success-tools{
     display: flex;
     width: 100%;
-    justify-content:space-between;
-    position:absolute;
-    padding:0 4vw;
-    bottom: 4vw;
-    a{
+    margin-top: 10vw;
+    justify-content:space-around;
+    padding:0 16vw;
+    .adm-button{
         text-align: center;
-        line-height: 12vw;
-        width: 44vw;
-        height: 12vw;
+        width: 30vw;
         font-size:4vw;
         border-radius: 2vw;
     }

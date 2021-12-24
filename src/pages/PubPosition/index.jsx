@@ -81,7 +81,7 @@ export default function(props){
             name:'type',
             content:'',
             method:showPicker,
-            pickList:[['合伙人','技术人员','管理人员','后勤人员']],//对应columns
+            pickList:[['管理类','专业技术类','专业支持类','营销类','操作类']],//对应columns
             placeholder:'请选择职位类型'
 
         },

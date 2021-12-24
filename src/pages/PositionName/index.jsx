@@ -66,6 +66,7 @@ export default(props)=>{
                 onChange={(v)=>{setInputVal(v)}}
             />
              <TreeSelect
+             defaultValue={[100000]}
              options={options}
              fieldNames={replaceField}
                 onChange={(value) => {

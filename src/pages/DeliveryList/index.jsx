@@ -97,16 +97,16 @@ export default (props)=>{
     return (
         <>
             <Tabs activeKey={activeKey} onChange={changeKey}>
-                <Tabs.Tab title='已处理' key='handled' >
+                <Tabs.Tab title='待处理' key='unhandled' >
                 </Tabs.Tab>
-                <Tabs.Tab title='未处理' key='unhandled'>
+                <Tabs.Tab title='已处理' key='handled'>
                 </Tabs.Tab>
             </Tabs>
             <div className='Tabs-content'>
                 {
                     activeKey==='handled'&&
                     handledList.map((item,index)=>{
-                        return <ResumeCard activeKey={activeKey} {...item} onClick={()=>toDeliveryDetail(index,true)} shareClick={(e)=>shareClick(index,e)}></ResumeCard>
+                        return <ResumeCard  activeKey={activeKey}  {...item} onClick={()=>toDeliveryDetail(index,true)} shareClick={(e)=>shareClick(index,e)}></ResumeCard>
                     })
                 }
                 {

@@ -79,6 +79,13 @@ export default (props)=>{
     // 发送评价
     const sendEva=async()=>{
         console.log(props.match.params.deliveryRecodeId);
+        if(!currentScore||textVal==''){
+            Toast.show({
+                icon:'fail',
+                content:'请将评价填写完全'
+            })
+            return
+        }
         let eva={
             deliveryRecordId:props.match.params.deliveryRecordId,
             score:currentScore,

@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from "react";
 import {BrowserRouter,Switch,Route,Redirect,withRouter} from 'react-router-dom'
 import { oAuth } from "@/models/common";
-import routes from '@/router'
+import {menus} from '@/router'
 function App(props) {
     useEffect(() => {
 		// if(window.fb.getPlatform()===0){
@@ -25,7 +25,7 @@ function App(props) {
 	return (
 		<div className="app-root">
 				<Switch>
-					{routes.map((route)=>(
+					{menus.map((route)=>(
 						<Route
 							key={route.name}
 							path={route.path}

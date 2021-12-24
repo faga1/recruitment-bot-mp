@@ -6,16 +6,15 @@ import DeliveryList from '@/pages/DeliveryList'
 import DeliveryEva from '@/pages/DeliveryEva'
 import PositionName from '@/pages/PositionName'
 import PositionDesc from '@/pages/PositionDesc'
-import PlatFormErr from '@/pages/PlatFormErr'
 import DeliveryShared from '@/pages/DeliveryShared'
 import DeliveryDetail from '../pages/DeliveryDetail'
 import PdfDetail from '@/pages/PdfDetail'
 
-function flatten(arr) {
-	return arr.reduce((prev, current) => {
-		return prev.concat(Array.isArray(current.children) ? flatten(current.children) : current);
-	}, []);
-}
+// function flatten(arr) {
+// 	return arr.reduce((prev, current) => {
+// 		return prev.concat(Array.isArray(current.children) ? flatten(current.children) : current);
+// 	}, []);
+// }
 
 export const menus = [
 	{
@@ -75,13 +74,6 @@ export const menus = [
 		component:PositionDesc
 	},
 	{
-		path:'/platFormErr',
-		name:'平台错误',
-		icon:'',
-		exact:true,
-		component:PlatFormErr
-	},
-	{
 		path:'/deliveryShared/:resource',
 		name:'投递分享',
 		icon:'',
@@ -139,6 +131,6 @@ export const menus = [
 	// },
 ];
 
-const routes = flatten(menus);
+// const routes = flatten(menus);
 
-export default routes;
+// export default routes;
