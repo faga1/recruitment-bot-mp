@@ -130,3 +130,5 @@ npm run build
 * 如果需要修改navigationBarTitle需要配置小程序配置文件
 * 如果需要用vconsole进行调试不用通过cdn引入,会产生冲突
 * 使用fanbook小程序的api调用方法:window.fb.xxx
+* 部署后需要修改baseUrl，在src/components/request/index.js:25处修改
+* 部署后需要修改授权地址，该(重定向)地址由后端提供,重定向至授权页面(src/models/common.js)
